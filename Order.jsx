@@ -13,12 +13,15 @@ export default function Order() {
   const [loading, setLoading] = useState(true);
 
   let price, selectedPizza;
+
   if (!loading) {
     selectedPizza = pizzaTypes.find((pizza) => pizzaType === pizza.id);
+    price = intl.format(selectedPizza.sizes[pizzaSize]);
   }
 
+
   async function fetchPizzaTypes() {
-    const pizzaRes = await fetch("/api/pizzas");
+    const pizzaRes = await fetch('/api/pizzas');
     const pizzasJson = await pizzaRes.json();
     setPizzaTypes(pizzasJson);
     setLoading(false);
@@ -38,6 +41,7 @@ export default function Order() {
             <select
               onChange={(e) => setPizzaType(e.target.value)}
               name='pizza-type'
+              id="pizza-type"
               value={pizzaType}>
               {pizzaTypes.map((pizza) => (
                 <option key={pizza.id} value={pizza.id}>
@@ -87,14 +91,18 @@ export default function Order() {
           </div>
           <button type='submit'>Add to Cart</button>
         </div>
-        <div className='order-pizza'>
-          <Pizza
-            name='pepperoni'
-            description='another pizza'
-            image='/public/pizzas/pepperoni.webp'
-          />
-          <p>$13.37</p>
-        </div>
+        {loading ? (
+          <h3>loading...</h3>
+        ) : (
+          <div className='order-pizza'>
+            <Pizza
+              name={selectedPizza.name}
+              description={selectedPizza.description}
+              image={selectedPizza.image}
+            />
+            <p>{price}</p>
+          </div>
+        )}
       </form>
     </div>
   );
