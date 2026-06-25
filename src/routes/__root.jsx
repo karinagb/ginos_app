@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { componentTypes, createRootRoute, Outlet } from '@tanstack/react-router';
+import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 import PizzaOfTheDay from '../PizzaOfTheDay';
 import Header from '../Header';
