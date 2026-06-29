@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { createLazyFileRoute } from '@tanstack/react-router';
 import getPastOrders from '../api/getPastOrders';
@@ -8,7 +8,7 @@ import priceConverter from '../useCurrency';
 import ErrorBoundary from '../ErrorBoundary'
 
 export const Route = createLazyFileRoute('/past')({
-  component: PastOrdersRoute,
+  component: ErrorBoundaryWrappedPastOrderRoutes,
 });
 
 function ErrorBoundaryWrappedPastOrderRoutes() {
